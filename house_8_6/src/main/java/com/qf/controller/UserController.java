@@ -23,7 +23,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@RequestMapping("ajaxname.do")
+	@RequestMapping("/ajaxname.do")
 	@ResponseBody
 	public String ajaxname(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
@@ -36,7 +36,7 @@ public class UserController {
 			}
 	}
 	
-	@RequestMapping("login.do")
+	@RequestMapping("/login.do")
 	public ModelAndView login(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		String username = request.getParameter("username");
