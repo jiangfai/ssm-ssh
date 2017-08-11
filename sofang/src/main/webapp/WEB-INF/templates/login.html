@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>高大上租房网 - 用户登录</title>
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<div id="header" class="wrap">
+		<div id="logo">
+			<img src="images/logo.png" />
+		</div>
+	</div>
+	<div id="regLogin" class="wrap">
+		<div class="dialog">
+			<div class="box">
+				<h4>用户登录</h4>
+				<form action="#" th:action="@{/login}" th:object="${user}" method="post">
+					<div class="infos">
+						<table class="field">
+							<tr>
+								<td>&nbsp;</td>
+								<td style="color: red;" th:text="${hint}"></td>
+							</tr>
+							<tr>
+								<td class="field">用 户 名：</td>
+								<td>
+									<input th:field="*{username}" type="text" class="text">
+								</td>
+							</tr>
+							<tr>
+								<td class="field">密 码：</td>
+								<td>
+									<input th:field="*{password}" type="password" class="text">
+								</td>
+							</tr>
+							 
+							<tr>
+								<td class="field">验 证 码：</td>
+								<td>
+									<input id="codeStr" type="text" class="text" name="code">
+									<img id="code" src="code" width="120" height="30">
+								</td>
+							</tr>
+							
+							<tr>
+								<td></td>
+								<td>
+									<input type="checkbox" name="save"> 
+									<label>下次自动登录</label>
+								</td>
+							</tr>
+						</table>
+						<div class="buttons">
+							<input type="submit" value="立即登录">
+							<input id="toRegBtn" type="button" value="注册">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="footer" class="wrap">
+		<dl>
+			<dt>高大上租房网 &copy; 2013 攀峰科技 川ICP证1000001号</dt>
+			<dd>关于我们 · 联系方式 · 意见反馈 · 帮助中心</dd>
+		</dl>
+	</div>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script>
+		$('#code').on('click', function() {
+			$(this).attr('src', 'code?' + Math.random());
+		});
+		$('#toRegBtn').on('click', function() {
+			location.href="register.jsp";
+		});
+	</script>
+</body>
+</html>
+
+
