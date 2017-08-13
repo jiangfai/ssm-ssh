@@ -15,7 +15,7 @@
 		<div class="dialog">
 			<div class="box">
 				<h4>用户登录</h4>
-				<form action="#" th:action="@{/login}" th:object="${user}" method="post">
+				<form action="#" th:action="@{/login}" th:object="${userDTO.user}" method="post">
 					<div class="infos">
 						<table class="field">
 							<tr>
@@ -72,7 +72,7 @@
 			$(this).attr('src', 'code?' + Math.random());
 		});
 		$('#toRegBtn').on('click', function() {
-			location.href="register.jsp";
+			location.href="to_register";
 		});
 	</script>
 </body>

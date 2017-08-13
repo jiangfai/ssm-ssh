@@ -1,6 +1,5 @@
-﻿<%@ page pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
 		<title>高大上租房网 - 用户注册</title>
@@ -19,23 +18,23 @@
 					<dd class="past">填写个人信息</dd>
 				</dl>
 				<div class="box">
-					<form action="reg.do" method="post">
+					<form action="#" th:action="@{/register}" th:object="${user}" method="post">
 						<div class="infos">
 							<table class="field">
 								<tr>
 									<td>&nbsp;</td>
-									<td style="color: red">${hint}</td>
+									<td style="color: red" th:text="${hint}"></td>
 								</tr>
 								<tr>
 									<td class="field">用 户 名：</td>
 									<td>
-										<input id="username" type="text" class="text" name="username"> 
+										<input th:field="*{username}"  type="text" class="text" > 
 										<span id="isValid"></span>
 									</td>
 								</tr>
 								<tr>
 									<td class="field">密 码：</td>
-									<td><input type="password" class="text" name="password"></td>
+									<td><input th:field="*{password}" type="password" class="text" ></td>
 								</tr>
 								<tr>
 									<td class="field">确认密码：</td>
@@ -43,17 +42,17 @@
 								</tr>
 								<tr>
 									<td class="field">电 话：</td>
-									<td><input type="text" class="text" name="tel"></td>
+									<td><input th:field="*{tel}" type="text" class="text" ></td>
 								</tr>
 								<tr>
 									<td class="field">用户姓名：</td>
-									<td><input type="text" class="text" name="realname"></td>
+									<td><input th:field="*{realname}" type="text" class="text" name="realname"></td>
 								</tr>
 								<tr>
 									<td class="field">验 证 码：</td>
 									<td>
 										<input type="text" class="text" name="code"> 
-										<img id="code" src="" width="80" height="30">
+										<img id="code" src="code" width="80" height="30">
 									</td>
 								</tr>
 							</table>

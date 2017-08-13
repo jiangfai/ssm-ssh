@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.qfedu.house.domain.LoginLog;
 import com.qfedu.house.domain.User;
+import com.qfedu.house.dto.UserDTO;
 import com.qfedu.house.persistence.LoginLogDAO;
 import com.qfedu.house.persistence.UserDAO;
 import com.qfedu.house.service.UserService;
@@ -22,7 +23,8 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private LoginLogDAO loginLogDAO;
 	@Override
-	public boolean login(User user, String ipAddress) {
+	public boolean login(UserDTO userDTO) {
+		User user=userDTO.getUser();
 		User u = userDAO.findByUserName(user.getUsername());
 		if(u!=null){
 			String pwd=DigestUtils.md5Hex(user.getPassword());
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService{
 				user.setRealname(u.getRealname());
 				user.setTel(u.getTel());
 				LoginLog log=new LoginLog();
-				log.setIpAddress(ipAddress);
+				log.setIpAddress(userDTO.getCode());
 				log.setLogDate(new Date());
 				log.setUser(user);
 				loginLogDAO.save(log);
