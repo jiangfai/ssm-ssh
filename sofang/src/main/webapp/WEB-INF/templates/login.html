@@ -39,7 +39,7 @@
 								<td class="field">验 证 码：</td>
 								<td>
 									<input id="codeStr" type="text" class="text" name="code">
-									<img id="code" src="code" width="120" height="30">
+									<img id="code" src="code" width="120" height="40">
 								</td>
 							</tr>
 							
@@ -72,7 +72,7 @@
 			$(this).attr('src', 'code?' + Math.random());
 		});
 		$('#toRegBtn').on('click', function() {
-			location.href="to_register";
+			location.href="to_reg";
 		});
 	</script>
 </body>

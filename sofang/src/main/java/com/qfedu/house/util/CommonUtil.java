@@ -34,10 +34,10 @@ public final class CommonUtil {
 		for (int i = 0; i < code.length(); i++) {
 			g.setColor(Color.BLUE);
 			String str = code.substring(i, i + 1);
-			double theta=Math.PI/12*randomDouble(-1, 1);
-			g.rotate(theta);
-			g.drawString(str, 10+size*i, height/2);
-			g.rotate(-theta);
+			double theta=Math.PI/18*randomDouble(-1, 1);
+			g.rotate(theta,10,20);
+			g.drawString(str, 10+size*i, height-8);
+			g.rotate(-theta,10,20);
 		}
 		return bi;
 	}

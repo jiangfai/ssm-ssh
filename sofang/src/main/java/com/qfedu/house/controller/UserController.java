@@ -30,7 +30,7 @@ public class UserController {
 	public BufferedImage getCode(HttpSession session){
 		String str = CommonUtil.generateVC(VC_LEN);
 		session.setAttribute("code", str);
-		BufferedImage image = CommonUtil.getImageFromString(str, 120, 30);
+		BufferedImage image = CommonUtil.getImageFromString(str, 120, 40);
 		return image;
 	}
 	
@@ -50,13 +50,14 @@ public class UserController {
 		String code=userDTO.getCode();
 		String hint=null;
 		String viewName="login";
-		if(codeFromServer!=null &&codeFromServer.equals(code)){
+		if(codeFromServer!=null &&codeFromServer.equalsIgnoreCase(code)){
 		if(errors.hasErrors()){
 			hint="请输入有效的登录信息";
 		}else{
 			String ipAddress=req.getRemoteAddr();
 			userDTO.setIpAdress(ipAddress);
 			if(userService.login(userDTO)){
+				model.addAttribute("user",userDTO.getUser());
 				viewName="redirect:index";
 			}else{
 				hint="输入的用户名或密码有误";
@@ -71,7 +72,7 @@ public class UserController {
 		return viewName;
 	}
 	
-	@GetMapping("/to_register")
+	@GetMapping("/to_reg")
 	public String toRegister(Model model){
 		User user=new User();
 		model.addAttribute("user",user);
@@ -79,10 +80,32 @@ public class UserController {
 		return "register";
 	}
 	
-	@PostMapping("/register")
-	public String register(){
-		
-		return "register";
+	@PostMapping("/reg")
+	public String register(HttpServletRequest req,@Valid User user,Errors errors,Model model){
+		HttpSession session=req.getSession();
+		String codeFromServer = (String) session.getAttribute("code");
+		String code=req.getParameter("code");
+		String hint=null;
+		String viewname="register";
+		if(codeFromServer!=null && codeFromServer.equalsIgnoreCase(code)){
+			if(errors.hasErrors()){
+				hint="请输入有效的信息";
+				model.addAttribute("user",user);
+			}else{
+				if(userService.register(user)){
+					viewname="redirect:to_login";
+				}else{
+					model.addAttribute("user",user);
+					hint="请输入正确的用户名";
+				}
+			}
+		}else{
+			hint="验证码有误请重新输入";
+		}
+		if(hint!=null){
+			model.addAttribute("hint",hint);
+		}
+		return viewname;
 	}
 	
 }
